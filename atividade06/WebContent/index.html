@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
 		<title>Cadastro de paÍses</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/style.css">
 	</head>
 	
-	<body>
-		<h3>CADASTRE UM PAÍS:</h3>
-		<form action="./ManterPais.do" method="get">
-			nome: <input type="text" name="nome"><br>
-			populacao: <input type="text" name="populacao"><br>
-			area: <input type="text" name="area"><br>
-			<input type="submit">
-		</form>
+	<body class="bg-dark text-white">
+		<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+		  <a class="navbar-brand">PAÍSES</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="index.html">Cadastro</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+		
+		<div class="container">
+			<h1 class="mt-4">CADASTRE UM PAÍS:</h1>
+			
+			<form action="./ManterPais.do" method="get">
+				<div class="form-group">
+	    			<label>Nome:</label>
+				    <input type="text" class="form-control" name="nome">		  
+				</div>
+				<div class="form-group">
+	    			<label>População:</label>
+				    <input type="text" class="form-control" name="populacao">		  
+				</div>
+				<div class="form-group">
+	    			<label>Área:</label>
+				    <input type="text" class="form-control" name="area">		  
+				</div>
+				<button type="submit" class="btn btn-success">Salvar</button>
+				<button type="reset" class="btn btn-danger">Limpar</button>
+			</form>
+		</div>
+		
+		
+		<script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 	</body>
 </html>
