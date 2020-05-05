@@ -15,7 +15,10 @@ public class ConnectionFactory {
 	
 	// Obtem conexao com o banco de dados
 	public static Connection obtemConexao() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/paises", "master", "*Quiki18@");
+		return DriverManager.getConnection(
+			"jdbc:mysql://localhost:3306/paises?useTimezone=true&serverTimezone=America/Sao_Paulo",
+			"master",
+			"*Quiki18@"
+		);
 	}
-
 }
