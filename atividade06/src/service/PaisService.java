@@ -1,6 +1,9 @@
 package service;
 
 import model.Pais;
+
+import java.util.ArrayList;
+
 import dao.PaisDAO;
 
 
@@ -16,8 +19,8 @@ public class PaisService {
 		dao.atualizar(pais);
 	}
 	
-	public void excluir(Pais pais){
-		dao.deletar(pais);
+	public void excluir(int id){
+		dao.deletar(id);
 	}
 	
 	public Pais carregar(int id){
@@ -26,6 +29,14 @@ public class PaisService {
 	
 	public Pais carregarUltimo() {
 		return dao.carregarUltimo();
+	}
+	
+	public ArrayList<Pais> listarPaises(){
+		return dao.listarPaises();
+	}
+	
+	public ArrayList<Pais> listarPaises(String chave){
+		return dao.listarPaises(chave);
 	}
 
 }
