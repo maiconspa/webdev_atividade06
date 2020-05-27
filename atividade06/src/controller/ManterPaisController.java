@@ -26,27 +26,38 @@ public class ManterPaisController extends HttpServlet {
     @SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
-    	
-    	String acao = request.getParameter("acao");
-    	String nome = request.getParameter("nome");
-        long populacao = Integer.parseInt(request.getParameter("populacao"));
-        double area = Double.parseDouble(request.getParameter("area"));
-        ArrayList<Pais> lista = (ArrayList<Pais>)sessao.getAttribute("lista");
+		ArrayList<Pais> lista = new ArrayList<Pais>();
+		PaisService ps = new PaisService();
+		Pais p = new Pais();
+		
+        if (request.getParameter("id") != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            p.setId(id);
+    	}
         
-        Pais p = new Pais();
-        PaisService ps = new PaisService();
-
-        p.setId(0);
+        if (request.getParameter("populacao") != null) {
+            long populacao = Integer.parseInt(request.getParameter("populacao"));
+            p.setPopulacao(populacao);
+    	}
+        
+        if (request.getParameter("area") != null) {
+        	double area = Double.parseDouble(request.getParameter("area"));
+        	p.setArea(area);
+    	}
+        
+        if (sessao.getAttribute("lista") != null) {
+        	lista = (ArrayList<Pais>)sessao.getAttribute("lista");
+        }
+        
+        String nome = request.getParameter("nome");
         p.setNome(nome);
-        p.setPopulacao(populacao);
-        p.setArea(area);
+        
+        String acao = request.getParameter("acao");
         
     	switch(acao) {
-    	case "criar":            
+    	case "criar":
             ps.criar(p);
-            
             p = ps.carregarUltimo();
-         
             request.setAttribute("pais", p);
             request.getRequestDispatcher("visualizarPais.jsp").forward(request, response);
     	break;
@@ -60,10 +71,6 @@ public class ManterPaisController extends HttpServlet {
     	
     	case "alterar":
     		ps.atualizar(p);
-			int pos = busca(p, lista);
-			lista.remove(pos);
-			lista.add(pos, p);
-			sessao.setAttribute("lista", lista);
 			request.setAttribute("pais", p);
 			request.getRequestDispatcher("visualizarPais.jsp").forward(request, response);
 		break;
@@ -77,7 +84,7 @@ public class ManterPaisController extends HttpServlet {
     	case "editar":
     		p = ps.carregar(p.getId());
 			request.setAttribute("pais", p);
-			request.getRequestDispatcher("AlterarCliente.jsp").forward(request, response);
+			request.getRequestDispatcher("alterarPais.jsp").forward(request, response);
     	break;
     	}
     }

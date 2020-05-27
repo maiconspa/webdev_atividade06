@@ -16,7 +16,7 @@ import service.PaisService;
 /**
  * @author maicon
  */
-@WebServlet("/Listar_paises.do")
+@WebServlet("/ListarPaises.do")
 public class ListarPaisesControler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class ListarPaisesControler extends HttpServlet {
 			session.setAttribute("lista", null);
 		}
 
-		request.getRequestDispatcher("ListarPaises.jsp").forward(request, response);
+		request.getRequestDispatcher("listarPaises.jsp").forward(request, response);
 	}
 
 	/**
@@ -68,5 +68,4 @@ public class ListarPaisesControler extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

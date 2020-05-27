@@ -21,7 +21,15 @@ public class PaisDAO {
 			stm.setLong(2, pais.getPopulacao());
 			stm.setDouble(3, pais.getArea());
 			stm.execute();
-			System.out.println("deu certo criar");
+			String sqlQuery = "SELECT LAST_INSERT_ID()";
+			try (PreparedStatement stm2 = c.prepareStatement(sqlQuery);
+					ResultSet rs = stm2.executeQuery();) {
+				if (rs.next()) {
+					pais.setId(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
 			System.out.println("problema criar");
 			e.printStackTrace();
@@ -117,10 +125,10 @@ public class PaisDAO {
 
 	public ArrayList<Pais> listarPaises() {
 		ArrayList<Pais> lista = new ArrayList<>();
-		String sqlSelect = "SELECT id, nome, populacao, area FROM pais";
+		String sqlSelect = "SELECT * FROM pais";
 		try (Connection conn = ConnectionFactory.obtemConexao();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-			try (ResultSet rs = stm.executeQuery();) {
+			try (ResultSet rs = stm.executeQuery()) {
 				while (rs.next()) {
 					Pais p = new Pais();
 					p.setId(rs.getInt("id"));
